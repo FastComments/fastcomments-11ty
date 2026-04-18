@@ -2,6 +2,10 @@
 
 A fast, full-featured live commenting widget for [Eleventy](https://www.11ty.dev) (11ty), powered by [FastComments](https://fastcomments.com).
 
+## Live Demo
+
+Try every widget live at <https://fastcomments.com/commenting-system-for-11ty>.
+
 ## Live Showcase
 
 To see every shortcode and flow running locally against the public `demo` tenant, clone the repo and run:

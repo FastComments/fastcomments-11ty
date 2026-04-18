@@ -1,6 +1,6 @@
 {
   "name": "fastcomments-11ty",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Eleventy (11ty) plugin for FastComments, a live commenting system.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
