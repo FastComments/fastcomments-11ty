@@ -1,0 +1,91 @@
+---
+layout: base.njk
+title: FastComments 11ty Showcase
+---
+
+{% set widgets = [
+  { href: "/comments/", label: "Live Comment Widget", hint: "Full live commenting widget with replies, voting, moderation, and media." },
+  { href: "/comment-count/", label: "Comment Count", hint: "Drop-in count badge for any listing or feed." },
+  { href: "/live-chat/", label: "Live Chat", hint: "High-velocity streaming chat for live events." },
+  { href: "/collab-chat/", label: "Collab Chat", hint: "Anchor threads to text selections inside articles." },
+  { href: "/image-chat/", label: "Image Chat", hint: "Pin discussions to specific regions of any image." },
+  { href: "/recent-comments/", label: "Recent Comments", hint: "Cross-site stream of the latest comments on a tenant." },
+  { href: "/recent-discussions/", label: "Recent Discussions", hint: "The most active threads on a tenant, ranked by activity." },
+  { href: "/top-pages/", label: "Top Pages", hint: "Pages ranked by comment activity." },
+  { href: "/reviews-summary/", label: "Reviews Summary", hint: "Star-rating aggregate with breakdown." },
+  { href: "/user-activity-feed/", label: "Activity Feed", hint: "A single user's chronological activity stream." }
+] %}
+
+{% set flows = [
+  { href: "/dark-mode/", label: "Dark Mode", hint: "Toggle the widget theme at runtime via the hasDarkBackground flag." },
+  { href: "/eu/", label: "EU Region", hint: "Pin widget reads and writes to the EU datacenter." },
+  { href: "/paginated/", label: "Thread Pagination", hint: "Swap urlId at runtime to jump between products, posts, or pages." },
+  { href: "/simple-sso/", label: "Simple SSO", hint: "Unsigned identity flow. Drop in a user object and go." },
+  { href: "/secure-sso/", label: "Secure SSO", hint: "HMAC-signed identity from your server for production use." }
+] %}
+
+<div class="fc-hero">
+  <div>
+    <div class="fc-hero__label">fastcomments / 11ty · showcase</div>
+    <h1 class="fc-hero__title">Comment<br>infrastructure<br><em>for 11ty.</em></h1>
+    <p class="fc-hero__body">
+      Every Nunjucks shortcode exported by <code style="font-family: var(--fc-mono); color: var(--fc-ink);">fastcomments-11ty</code>,
+      rendered against the public demo tenant. Each route is one statically-generated Nunjucks template you can copy into your own site.
+    </p>
+  </div>
+
+  <div class="fc-hero__meta">
+    <div class="fc-meta-card">
+      <div class="fc-meta-card__key">Widgets</div>
+      <div class="fc-meta-card__value fc-meta-card__value--gradient">{{ widgets | length }}</div>
+    </div>
+    <div class="fc-meta-card">
+      <div class="fc-meta-card__key">Flows</div>
+      <div class="fc-meta-card__value">{{ flows | length }}</div>
+    </div>
+    <div class="fc-meta-card">
+      <div class="fc-meta-card__key">Package</div>
+      <div class="fc-meta-card__value" style="font-family: var(--fc-mono); font-size: 14px; margin-top: 10px;">fastcomments-11ty</div>
+    </div>
+    <div class="fc-meta-card">
+      <div class="fc-meta-card__key">Rendering</div>
+      <div class="fc-meta-card__value" style="font-family: var(--fc-mono); font-size: 14px; margin-top: 10px;">SSG</div>
+    </div>
+  </div>
+</div>
+
+<div class="fc-section-title">
+  <span>01</span>
+  <h2>Widgets</h2>
+  <div class="fc-rule"></div>
+  <span>{{ widgets | length }} components</span>
+</div>
+
+<div class="fc-grid">
+  {% for item in widgets %}
+    <a class="fc-card" href="{{ item.href }}" style="animation: fc-rise 480ms ease both; animation-delay: {{ loop.index0 * 40 }}ms;">
+      <span class="fc-card__kind">widget</span>
+      <span class="fc-card__title">{{ item.label }}</span>
+      <span class="fc-card__hint">{{ item.hint }}</span>
+      <span class="fc-card__cta">Open example</span>
+    </a>
+  {% endfor %}
+</div>
+
+<div class="fc-section-title">
+  <span>02</span>
+  <h2>Flows &amp; configuration</h2>
+  <div class="fc-rule"></div>
+  <span>{{ flows | length }} recipes</span>
+</div>
+
+<div class="fc-grid">
+  {% for item in flows %}
+    <a class="fc-card" href="{{ item.href }}" style="animation: fc-rise 480ms ease both; animation-delay: {{ loop.index0 * 40 }}ms;">
+      <span class="fc-card__kind">flow</span>
+      <span class="fc-card__title">{{ item.label }}</span>
+      <span class="fc-card__hint">{{ item.hint }}</span>
+      <span class="fc-card__cta">Open example</span>
+    </a>
+  {% endfor %}
+</div>

@@ -1,0 +1,35 @@
+---
+layout: base.njk
+title: Recent Discussions
+permalink: /recent-discussions/
+---
+
+<div class="fc-demo">
+  <header class="fc-demo__head">
+    <div>
+      <div class="fc-demo__breadcrumb">Widgets <em>/ Recent Discussions</em></div>
+      <h1 class="fc-demo__title">Recent Discussions</h1>
+      <p class="fc-demo__subtitle">The most active threads on a tenant, ranked by recent activity. Great for
+        community landing pages and forum-style indexes.</p>
+    </div>
+    <div class="fc-demo__actions">
+      <span class="fc-tag fc-tag--brand">Tenant · demo</span>
+    </div>
+  </header>
+  <div class="fc-stage__panel fc-stage__panel--light">
+    {% fastcommentsRecentDiscussions { tenantId: "demo" } %}
+  </div>
+
+  <div class="fc-code-panel">
+    <div class="fc-code-panel__head">
+      <span class="fc-code-panel__head-label">src/pages/recent-discussions.njk</span>
+      <button type="button" class="fc-code-panel__copy" data-fc-copy-for="code-recent-discussions">Copy</button>
+    </div>
+    <pre id="code-recent-discussions" class="fc-code-panel__body">{% raw %}---
+layout: base.njk
+permalink: /recent-discussions/
+---
+
+{% fastcommentsRecentDiscussions { tenantId: "demo" } %}{% endraw %}</pre>
+  </div>
+</div>

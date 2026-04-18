@@ -1,0 +1,50 @@
+{
+  "name": "fastcomments-11ty",
+  "version": "1.0.0",
+  "description": "Eleventy (11ty) plugin for FastComments, a live commenting system.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "keywords": [
+    "eleventy",
+    "11ty",
+    "eleventy-plugin",
+    "fastcomments",
+    "comments",
+    "commenting",
+    "live-chat",
+    "reviews"
+  ],
+  "homepage": "https://docs.fastcomments.com/guide-lib-11ty.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FastComments/fastcomments-11ty.git"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@11ty/eleventy": ">=2.0.0"
+  },
+  "dependencies": {
+    "fastcomments-typescript": "^3.0.12"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

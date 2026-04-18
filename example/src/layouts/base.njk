@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }} FastComments 11ty</title>
+  <script>
+    (function () {
+      try {
+        var s = localStorage.getItem('fc-showcase-theme');
+        if (s !== 'light' && s !== 'dark') {
+          s = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-fc-theme', s);
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="/fastcomments-showcase.css">
+</head>
+<body>
+  <div class="fc-shell">
+    <aside class="fc-rail">
+      <a class="fc-brand" href="/">
+        <img class="fc-brand__logo fc-brand__logo--light" src="https://fastcomments.com/images/svg/v2/logo.svg" alt="FastComments">
+        <img class="fc-brand__logo fc-brand__logo--dark" src="https://fastcomments.com/images/svg/v2/logo_white.svg" alt="" aria-hidden="true">
+        <span class="fc-brand__wordmark">
+          <span class="fc-brand__name">FastComments</span>
+          <span class="fc-brand__slug">11ty · showcase</span>
+        </span>
+      </a>
+
+      <nav class="fc-nav" aria-label="Examples">
+        <div class="fc-nav__group">
+          <div class="fc-nav__heading"><span>01</span><em>Widgets</em></div>
+          {% set navItems = [
+            { href: "/comments/", label: "Live Comment Widget", hint: "Full live commenting widget" },
+            { href: "/comment-count/", label: "Comment Count", hint: "Inline count badge" },
+            { href: "/live-chat/", label: "Live Chat", hint: "Realtime stream widget" },
+            { href: "/collab-chat/", label: "Collab Chat", hint: "Text-anchored threads" },
+            { href: "/image-chat/", label: "Image Chat", hint: "Region comments on images" },
+            { href: "/recent-comments/", label: "Recent Comments", hint: "Cross-site comment stream" },
+            { href: "/recent-discussions/", label: "Recent Discussions", hint: "Most active threads" },
+            { href: "/top-pages/", label: "Top Pages", hint: "Pages ranked by activity" },
+            { href: "/reviews-summary/", label: "Reviews Summary", hint: "Star ratings overview" },
+            { href: "/user-activity-feed/", label: "Activity Feed", hint: "Per-user timeline" }
+          ] %}
+          {% for item in navItems %}
+            <a class="fc-nav__item {% if page.url == item.href %}is-active{% endif %}" href="{{ item.href }}">
+              <span class="fc-nav__item-label">{{ item.label }}</span>
+              <span class="fc-nav__item-hint">{{ item.hint }}</span>
+            </a>
+          {% endfor %}
+        </div>
+
+        <div class="fc-nav__group">
+          <div class="fc-nav__heading"><span>02</span><em>Flows &amp; configuration</em></div>
+          {% set flowItems = [
+            { href: "/dark-mode/", label: "Dark Mode", hint: "Runtime theme switching" },
+            { href: "/eu/", label: "EU Region", hint: "Data residency via region flag" },
+            { href: "/paginated/", label: "Thread Pagination", hint: "Swap urlId at runtime" },
+            { href: "/simple-sso/", label: "Simple SSO", hint: "Unsigned identity" },
+            { href: "/secure-sso/", label: "Secure SSO", hint: "HMAC-signed identity" }
+          ] %}
+          {% for item in flowItems %}
+            <a class="fc-nav__item {% if page.url == item.href %}is-active{% endif %}" href="{{ item.href }}">
+              <span class="fc-nav__item-label">{{ item.label }}</span>
+              <span class="fc-nav__item-hint">{{ item.hint }}</span>
+            </a>
+          {% endfor %}
+        </div>
+      </nav>
+
+      <footer class="fc-rail__foot">
+        <div class="fc-theme-toggle" role="group" aria-label="Theme">
+          <button type="button" class="fc-theme-toggle__btn" data-fc-theme-btn="light">Light</button>
+          <button type="button" class="fc-theme-toggle__btn" data-fc-theme-btn="dark">Dark</button>
+        </div>
+        <div><code>npm i fastcomments-11ty</code></div>
+        <a href="https://fastcomments.com" rel="noopener">fastcomments.com &nearr;</a>
+      </footer>
+    </aside>
+
+    <main class="fc-stage">{{ content | safe }}</main>
+  </div>
+
+  <script>
+    (function () {
+      var STORAGE = 'fc-showcase-theme';
+      var USER_SET = STORAGE + ':user-set';
+
+      function initialTheme() {
+        try {
+          var stored = window.localStorage.getItem(STORAGE);
+          if (stored === 'light' || stored === 'dark') return stored;
+        } catch (_) {}
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+
+      window.__fcInstances = window.__fcInstances || [];
+      ['FastCommentsUI', 'FastCommentsCollabChatUI', 'FastCommentsImageChatUI', 'FastCommentsReviewsSummaryUI', 'FastCommentsUserActivityFeedUI', 'FastCommentsCommentCountUI'].forEach(function (name) {
+        var desc = Object.getOwnPropertyDescriptor(window, name);
+        if (desc && desc.__fcPatched) return;
+        var current;
+        Object.defineProperty(window, name, {
+          configurable: true,
+          get: function () {
+            if (!current) return undefined;
+            return function () {
+              var inst = current.apply(this, arguments);
+              if (inst && typeof inst.update === 'function') {
+                window.__fcInstances.push({ inst: inst, base: arguments[1] });
+              }
+              return inst;
+            };
+          },
+          set: function (v) { current = v; }
+        });
+        Object.getOwnPropertyDescriptor(window, name).__fcPatched = true;
+      });
+
+      function applyTheme(next) {
+        document.documentElement.dataset.fcTheme = next;
+        try { window.localStorage.setItem(STORAGE, next); } catch (_) {}
+        document.querySelectorAll('[data-fc-theme-btn]').forEach(function (b) {
+          b.classList.toggle('is-active', b.getAttribute('data-fc-theme-btn') === next);
+        });
+        var isDark = next === 'dark';
+        (window.__fcInstances || []).forEach(function (entry) {
+          try {
+            var merged = Object.assign({}, entry.base, { hasDarkBackground: isDark });
+            entry.inst.update(merged);
+          } catch (_) {}
+        });
+      }
+
+      applyTheme(initialTheme());
+
+      document.addEventListener('click', function (e) {
+        var t = e.target;
+        if (t && t.matches && t.matches('[data-fc-theme-btn]')) {
+          try { window.localStorage.setItem(USER_SET, '1'); } catch (_) {}
+          applyTheme(t.getAttribute('data-fc-theme-btn'));
+        }
+      });
+
+      if (window.matchMedia) {
+        var mq = window.matchMedia('(prefers-color-scheme: dark)');
+        var handler = function (e) {
+          var userSet;
+          try { userSet = window.localStorage.getItem(USER_SET); } catch (_) {}
+          if (!userSet) applyTheme(e.matches ? 'dark' : 'light');
+        };
+        if (mq.addEventListener) mq.addEventListener('change', handler);
+      }
+
+      document.addEventListener('click', function (e) {
+        var t = e.target;
+        if (!t || !t.matches || !t.matches('[data-fc-copy-for]')) return;
+        var id = t.getAttribute('data-fc-copy-for');
+        var pre = id ? document.getElementById(id) : null;
+        if (!pre) return;
+        navigator.clipboard.writeText(pre.textContent || '').then(function () {
+          var prev = t.textContent;
+          t.textContent = 'Copied';
+          setTimeout(function () { t.textContent = prev; }, 1200);
+        }).catch(function () {});
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+---
+layout: base.njk
+title: Comments
+permalink: /comments/
+---
+
+<div class="fc-demo">
+  <header class="fc-demo__head">
+    <div>
+      <div class="fc-demo__breadcrumb">Widgets <em>/ Live Comment Widget</em></div>
+      <h1 class="fc-demo__title">Live Comment Widget</h1>
+      <p class="fc-demo__subtitle">The flagship live commenting widget. Replies, voting, moderation, media
+        attachments, and realtime sync come bundled in the default configuration.</p>
+    </div>
+    <div class="fc-demo__actions">
+      <span class="fc-tag fc-tag--brand">Tenant · demo</span>
+    </div>
+  </header>
+  <div class="fc-stage__panel fc-stage__panel--light">
+    {% fastcomments { tenantId: "demo" } %}
+  </div>
+
+  <div class="fc-code-panel">
+    <div class="fc-code-panel__head">
+      <span class="fc-code-panel__head-label">src/pages/comments.njk</span>
+      <button type="button" class="fc-code-panel__copy" data-fc-copy-for="code-comments">Copy</button>
+    </div>
+    <pre id="code-comments" class="fc-code-panel__body">{% raw %}---
+layout: base.njk
+permalink: /comments/
+---
+
+{% fastcomments { tenantId: "demo" } %}{% endraw %}</pre>
+  </div>
+</div>

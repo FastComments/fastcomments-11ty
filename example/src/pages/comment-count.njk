@@ -1,0 +1,38 @@
+---
+layout: base.njk
+title: Comment Count
+permalink: /comment-count/
+---
+
+<div class="fc-demo">
+  <header class="fc-demo__head">
+    <div>
+      <div class="fc-demo__breadcrumb">Widgets <em>/ Comment Count</em></div>
+      <h1 class="fc-demo__title">Comment Count</h1>
+      <p class="fc-demo__subtitle">A low-weight count badge you can drop inline with any list item, card, or
+        document link. Stays live as new comments come in.</p>
+    </div>
+    <div class="fc-demo__actions">
+      <span class="fc-tag fc-tag--brand">Tenant · demo</span>
+    </div>
+  </header>
+  <div class="fc-stage__panel" style="display: flex; align-items: center; gap: 14px;">
+    <span style="font-family: var(--fc-mono); font-size: 12px; color: var(--fc-ink-mute); letter-spacing: 0.2em; text-transform: uppercase;">Count rendered →</span>
+    <div style="font-family: var(--fc-body); font-size: 14px; color: var(--fc-ink);">
+      {% fastcommentsCommentCount { tenantId: "demo" } %}
+    </div>
+  </div>
+
+  <div class="fc-code-panel">
+    <div class="fc-code-panel__head">
+      <span class="fc-code-panel__head-label">src/pages/comment-count.njk</span>
+      <button type="button" class="fc-code-panel__copy" data-fc-copy-for="code-comment-count">Copy</button>
+    </div>
+    <pre id="code-comment-count" class="fc-code-panel__body">{% raw %}---
+layout: base.njk
+permalink: /comment-count/
+---
+
+<p>This page has {% fastcommentsCommentCount { tenantId: "demo" } %} comments.</p>{% endraw %}</pre>
+  </div>
+</div>

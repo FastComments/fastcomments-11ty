@@ -1,0 +1,15 @@
+{
+  "name": "fastcomments-11ty-example",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  },
+  "dependencies": {
+    "fastcomments-11ty": "file:.."
+  }
+}

@@ -1,0 +1,36 @@
+---
+layout: base.njk
+title: Dark Mode
+permalink: /dark-mode/
+---
+
+<div class="fc-demo">
+  <header class="fc-demo__head">
+    <div>
+      <div class="fc-demo__breadcrumb">Flows <em>/ Dark Mode</em></div>
+      <h1 class="fc-demo__title">Dark Mode</h1>
+      <p class="fc-demo__subtitle">The widget responds to the
+        <code style="font-family: var(--fc-mono); color: var(--fc-ink);">hasDarkBackground</code>
+        flag. This showcase&rsquo;s global theme toggle propagates the current value to every widget on the page live.</p>
+    </div>
+    <div class="fc-demo__actions">
+      <span class="fc-tag fc-tag--brand">Tenant · demo</span>
+    </div>
+  </header>
+  <div class="fc-stage__panel fc-stage__panel--light">
+    {% fastcomments { tenantId: "demo", urlId: "11ty-demo-dark" } %}
+  </div>
+
+  <div class="fc-code-panel">
+    <div class="fc-code-panel__head">
+      <span class="fc-code-panel__head-label">src/pages/dark-mode.njk</span>
+      <button type="button" class="fc-code-panel__copy" data-fc-copy-for="code-dark">Copy</button>
+    </div>
+    <pre id="code-dark" class="fc-code-panel__body">{% raw %}---
+layout: base.njk
+permalink: /dark-mode/
+---
+
+{% fastcomments { tenantId: "demo", hasDarkBackground: true } %}{% endraw %}</pre>
+  </div>
+</div>

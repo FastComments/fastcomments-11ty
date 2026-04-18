@@ -1,0 +1,36 @@
+---
+layout: base.njk
+title: Live Chat
+permalink: /live-chat/
+---
+
+<div class="fc-demo">
+  <header class="fc-demo__head">
+    <div>
+      <div class="fc-demo__breadcrumb">Widgets <em>/ Live Chat</em></div>
+      <h1 class="fc-demo__title">Live Chat</h1>
+      <p class="fc-demo__subtitle">The streaming variant. Tuned for live events, launches, and broadcasts
+        where conversation volume would overwhelm a conventional threaded view.</p>
+    </div>
+    <div class="fc-demo__actions">
+      <span class="fc-tag fc-tag--brand">Tenant · demo</span>
+      <span class="fc-tag">Mode · streaming</span>
+    </div>
+  </header>
+  <div class="fc-stage__panel fc-stage__panel--light">
+    {% fastcommentsLiveChat { tenantId: "demo" } %}
+  </div>
+
+  <div class="fc-code-panel">
+    <div class="fc-code-panel__head">
+      <span class="fc-code-panel__head-label">src/pages/live-chat.njk</span>
+      <button type="button" class="fc-code-panel__copy" data-fc-copy-for="code-live-chat">Copy</button>
+    </div>
+    <pre id="code-live-chat" class="fc-code-panel__body">{% raw %}---
+layout: base.njk
+permalink: /live-chat/
+---
+
+{% fastcommentsLiveChat { tenantId: "demo" } %}{% endraw %}</pre>
+  </div>
+</div>

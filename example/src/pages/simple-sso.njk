@@ -1,0 +1,53 @@
+---
+layout: base.njk
+title: Simple SSO
+permalink: /simple-sso/
+---
+
+<div class="fc-demo">
+  <header class="fc-demo__head">
+    <div>
+      <div class="fc-demo__breadcrumb">Flows <em>/ Simple SSO</em></div>
+      <h1 class="fc-demo__title">Simple SSO</h1>
+      <p class="fc-demo__subtitle">The zero-backend identity flow. Hand the widget a user object with a
+        username and optional metadata. The account is created or updated on first comment.</p>
+    </div>
+    <div class="fc-demo__actions">
+      <span class="fc-tag fc-tag--brand">Mode · Simple</span>
+      <span class="fc-tag">User · Someone</span>
+    </div>
+  </header>
+  <div class="fc-stage__panel fc-stage__panel--light">
+    {% fastcomments {
+      tenantId: "demo",
+      urlId: "11ty-demo-simple-sso",
+      simpleSSO: {
+        username: "Someone",
+        email: "someone@somewhere.com",
+        avatar: "https://staticm.fastcomments.com/1582299581264-69384190_3015192525174365_476457575596949504_o.jpg",
+        websiteUrl: "https://blog.fastcomments.com"
+      }
+    } %}
+  </div>
+
+  <div class="fc-code-panel">
+    <div class="fc-code-panel__head">
+      <span class="fc-code-panel__head-label">src/pages/simple-sso.njk</span>
+      <button type="button" class="fc-code-panel__copy" data-fc-copy-for="code-simple-sso">Copy</button>
+    </div>
+    <pre id="code-simple-sso" class="fc-code-panel__body">{% raw %}---
+layout: base.njk
+permalink: /simple-sso/
+---
+
+{% fastcomments {
+  tenantId: "demo",
+  urlId: "demo-simple-sso",
+  simpleSSO: {
+    username: "Someone",
+    email: "someone@somewhere.com",
+    avatar: "https://example.com/avatar.jpg"
+  }
+} %}{% endraw %}</pre>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+---
+layout: base.njk
+title: Top Pages
+permalink: /top-pages/
+---
+
+<div class="fc-demo">
+  <header class="fc-demo__head">
+    <div>
+      <div class="fc-demo__breadcrumb">Widgets <em>/ Top Pages</em></div>
+      <h1 class="fc-demo__title">Top Pages</h1>
+      <p class="fc-demo__subtitle">A ranked list of pages by comment activity. Perfect for blog indexes, community
+        highlights, and editorial dashboards that want to surface what readers are engaging with.</p>
+    </div>
+    <div class="fc-demo__actions">
+      <span class="fc-tag fc-tag--brand">Tenant · demo</span>
+    </div>
+  </header>
+  <div class="fc-stage__panel fc-stage__panel--light">
+    {% fastcommentsTopPages { tenantId: "demo" } %}
+  </div>
+
+  <div class="fc-code-panel">
+    <div class="fc-code-panel__head">
+      <span class="fc-code-panel__head-label">src/pages/top-pages.njk</span>
+      <button type="button" class="fc-code-panel__copy" data-fc-copy-for="code-top-pages">Copy</button>
+    </div>
+    <pre id="code-top-pages" class="fc-code-panel__body">{% raw %}---
+layout: base.njk
+permalink: /top-pages/
+---
+
+{% fastcommentsTopPages { tenantId: "demo" } %}{% endraw %}</pre>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+---
+layout: base.njk
+title: User Activity Feed
+permalink: /user-activity-feed/
+---
+
+<div class="fc-demo">
+  <header class="fc-demo__head">
+    <div>
+      <div class="fc-demo__breadcrumb">Widgets <em>/ Activity Feed</em></div>
+      <h1 class="fc-demo__title">User Activity Feed</h1>
+      <p class="fc-demo__subtitle">A chronological stream of a single user&rsquo;s comments and interactions
+        perfect for profile pages, moderation views, and reputation dashboards.</p>
+    </div>
+    <div class="fc-demo__actions">
+      <span class="fc-tag fc-tag--brand">Tenant · demo</span>
+      <span class="fc-tag">userId · demo:someone@somewhere.com</span>
+    </div>
+  </header>
+  <div class="fc-stage__panel fc-stage__panel--light">
+    {% fastcommentsUserActivityFeed { tenantId: "demo", userId: "demo:someone@somewhere.com" } %}
+  </div>
+
+  <div class="fc-code-panel">
+    <div class="fc-code-panel__head">
+      <span class="fc-code-panel__head-label">src/pages/user-activity-feed.njk</span>
+      <button type="button" class="fc-code-panel__copy" data-fc-copy-for="code-activity">Copy</button>
+    </div>
+    <pre id="code-activity" class="fc-code-panel__body">{% raw %}---
+layout: base.njk
+permalink: /user-activity-feed/
+---
+
+<!-- SSO userId format: `${tenantId}:${appUserId}` -->
+{% fastcommentsUserActivityFeed { tenantId: "demo", userId: "demo:someone@somewhere.com" } %}{% endraw %}</pre>
+  </div>
+</div>

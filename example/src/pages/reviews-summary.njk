@@ -1,0 +1,36 @@
+---
+layout: base.njk
+title: Reviews Summary
+permalink: /reviews-summary/
+---
+
+<div class="fc-demo">
+  <header class="fc-demo__head">
+    <div>
+      <div class="fc-demo__breadcrumb">Widgets <em>/ Reviews Summary</em></div>
+      <h1 class="fc-demo__title">Reviews Summary</h1>
+      <p class="fc-demo__subtitle">A compact star-rating aggregate with per-rating breakdown. Drops into product
+        pages, listing previews, and marketing components wherever aggregate sentiment matters more than individual
+        comments.</p>
+    </div>
+    <div class="fc-demo__actions">
+      <span class="fc-tag fc-tag--brand">Tenant · demo</span>
+    </div>
+  </header>
+  <div class="fc-stage__panel fc-stage__panel--light">
+    {% fastcommentsReviewsSummary { tenantId: "demo", urlId: "demo-ratings" } %}
+  </div>
+
+  <div class="fc-code-panel">
+    <div class="fc-code-panel__head">
+      <span class="fc-code-panel__head-label">src/pages/reviews-summary.njk</span>
+      <button type="button" class="fc-code-panel__copy" data-fc-copy-for="code-reviews">Copy</button>
+    </div>
+    <pre id="code-reviews" class="fc-code-panel__body">{% raw %}---
+layout: base.njk
+permalink: /reviews-summary/
+---
+
+{% fastcommentsReviewsSummary { tenantId: "demo", urlId: "demo-ratings" } %}{% endraw %}</pre>
+  </div>
+</div>

@@ -1,0 +1,100 @@
+---
+layout: base.njk
+title: Secure SSO
+permalink: /secure-sso/
+---
+
+<div class="fc-demo">
+  <header class="fc-demo__head">
+    <div>
+      <div class="fc-demo__breadcrumb">Flows <em>/ Secure SSO</em></div>
+      <h1 class="fc-demo__title">Secure SSO</h1>
+      <p class="fc-demo__subtitle">Production-grade identity. Your server HMAC-signs a base64 user payload; the widget
+        verifies it before trusting any session. Pair with the
+        <a href="https://github.com/fastcomments/fastcomments-code-examples/tree/master/sso/node-express" target="_blank" rel="noopener" style="color: var(--fc-accent-c); text-decoration: underline dashed;">node-express reference server</a>.</p>
+    </div>
+    <div class="fc-demo__actions">
+      <span class="fc-tag fc-tag--brand">Mode · HMAC</span>
+      <span class="fc-tag" id="fc-sso-status">Status · loading</span>
+    </div>
+  </header>
+
+  <div id="fc-sso-error" class="fc-stage__panel" style="display: none; border-color: rgba(255, 59, 48, 0.5); background: rgba(255, 59, 48, 0.05); margin-bottom: 18px;">
+    <div style="font-family: var(--fc-mono); font-size: 13px; color: #ff8b85;">
+      Couldn&rsquo;t reach the example SSO server.<br />
+      <span style="color: var(--fc-ink-mute);">
+        Run <code>node-express</code> from
+        <a href="https://github.com/fastcomments/fastcomments-code-examples" target="_blank" rel="noopener" style="color: var(--fc-accent-c); text-decoration: underline dashed;">fastcomments-code-examples</a>
+        on port 3003 to continue.
+      </span>
+    </div>
+  </div>
+
+  <div class="fc-stage__panel fc-stage__panel--light">
+    {% fastcomments {
+      tenantId: "demo",
+      urlId: "11ty-demo-secure-sso",
+      sso: {
+        loginURL: "https://example.com/login",
+        logoutURL: "https://example.com/logout"
+      }
+    } %}
+  </div>
+
+  <div class="fc-code-panel">
+    <div class="fc-code-panel__head">
+      <span class="fc-code-panel__head-label">src/pages/secure-sso.njk</span>
+      <button type="button" class="fc-code-panel__copy" data-fc-copy-for="code-secure-sso">Copy</button>
+    </div>
+    <pre id="code-secure-sso" class="fc-code-panel__body">{% raw %}---
+layout: base.njk
+permalink: /secure-sso/
+---
+
+{% fastcomments {
+  tenantId: "demo",
+  urlId: "demo-secure-sso",
+  sso: {
+    loginURL: "https://example.com/login",
+    logoutURL: "https://example.com/logout"
+  }
+} %}
+
+<script>
+  // Your server HMAC-signs a base64 user payload; fetch and update the widget
+  const r = await fetch('/sso-user-info');
+  const info = await r.json();
+  const entry = window.__fcInstances?.find(
+    (e) => e.base?.urlId === 'demo-secure-sso'
+  );
+  if (entry) {
+    const merged = { ...entry.base, sso: { ...entry.base.sso, ...info } };
+    entry.inst.update(merged);
+    entry.base = merged;
+  }
+</script>{% endraw %}</pre>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var statusEl = document.getElementById('fc-sso-status');
+    var errEl = document.getElementById('fc-sso-error');
+    var setStatus = function (s) { if (statusEl) statusEl.textContent = 'Status · ' + s; };
+    fetch('http://localhost:3003/sso-user-info', { headers: { Accept: 'application/json' } })
+      .then(function (res) { return res.json(); })
+      .then(function (info) {
+        var entry = (window.__fcInstances || []).find(function (e) { return e.base && e.base.urlId === '11ty-demo-secure-sso'; });
+        if (entry) {
+          var merged = Object.assign({}, entry.base, { sso: Object.assign({}, entry.base.sso, info) });
+          entry.inst.update(merged);
+          entry.base = merged;
+        }
+        setStatus('ready');
+      })
+      .catch(function () {
+        setStatus('error');
+        if (errEl) errEl.style.display = '';
+      });
+  })();
+</script>

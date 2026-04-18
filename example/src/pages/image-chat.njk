@@ -1,0 +1,37 @@
+---
+layout: base.njk
+title: Image Chat
+permalink: /image-chat/
+---
+
+<div class="fc-demo">
+  <header class="fc-demo__head">
+    <div>
+      <div class="fc-demo__breadcrumb">Widgets <em>/ Image Chat</em></div>
+      <h1 class="fc-demo__title">Image Chat</h1>
+      <p class="fc-demo__subtitle">Drag to select any region of the image. A threaded discussion gets pinned to the
+        exact region. Ideal for design reviews, bug triage, and creative collaboration.</p>
+    </div>
+    <div class="fc-demo__actions">
+      <span class="fc-tag fc-tag--brand">Tenant · demo</span>
+    </div>
+  </header>
+  <div class="fc-stage__panel fc-stage__panel--light">
+    <img id="demo-image" src="https://fastcomments.com/images/image-chat-demo-1.jpg" alt="Sample image for commenting" style="max-width: 100%; height: auto; border-radius: 12px; display: block; margin: 0 auto 20px;">
+    {% fastcommentsImageChat { tenantId: "demo", target: "#demo-image" } %}
+  </div>
+
+  <div class="fc-code-panel">
+    <div class="fc-code-panel__head">
+      <span class="fc-code-panel__head-label">src/pages/image-chat.njk</span>
+      <button type="button" class="fc-code-panel__copy" data-fc-copy-for="code-image">Copy</button>
+    </div>
+    <pre id="code-image" class="fc-code-panel__body">{% raw %}---
+layout: base.njk
+permalink: /image-chat/
+---
+
+<img id="demo-image" src="https://fastcomments.com/images/image-chat-demo-1.jpg" alt="" />
+{% fastcommentsImageChat { tenantId: "demo", target: "#demo-image" } %}{% endraw %}</pre>
+  </div>
+</div>

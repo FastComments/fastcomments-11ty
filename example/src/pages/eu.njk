@@ -1,0 +1,37 @@
+---
+layout: base.njk
+title: EU Region
+permalink: /eu/
+---
+
+<div class="fc-demo">
+  <header class="fc-demo__head">
+    <div>
+      <div class="fc-demo__breadcrumb">Flows <em>/ EU Region</em></div>
+      <h1 class="fc-demo__title">EU Region</h1>
+      <p class="fc-demo__subtitle">Pin widget reads and writes to the EU datacenter for data-residency requirements.
+        A single <code style="font-family: var(--fc-mono); color: var(--fc-ink);">region: "eu"</code> flag routes
+        everything through the EU cluster.</p>
+    </div>
+    <div class="fc-demo__actions">
+      <span class="fc-tag fc-tag--brand">Region · EU</span>
+      <span class="fc-tag">GDPR-friendly</span>
+    </div>
+  </header>
+  <div class="fc-stage__panel fc-stage__panel--light">
+    {% fastcomments { tenantId: "demo", region: "eu", urlId: "11ty-demo-eu" } %}
+  </div>
+
+  <div class="fc-code-panel">
+    <div class="fc-code-panel__head">
+      <span class="fc-code-panel__head-label">src/pages/eu.njk</span>
+      <button type="button" class="fc-code-panel__copy" data-fc-copy-for="code-eu">Copy</button>
+    </div>
+    <pre id="code-eu" class="fc-code-panel__body">{% raw %}---
+layout: base.njk
+permalink: /eu/
+---
+
+{% fastcomments { tenantId: "demo", region: "eu", urlId: "demo-eu" } %}{% endraw %}</pre>
+  </div>
+</div>
