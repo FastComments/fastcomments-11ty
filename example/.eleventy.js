@@ -14,6 +14,7 @@ module.exports = function(eleventyConfig) {
         },
         templateFormats: ['njk', 'md', 'html'],
         markdownTemplateEngine: 'njk',
-        htmlTemplateEngine: 'njk'
+        htmlTemplateEngine: 'njk',
+        pathPrefix: process.env.BUILD_DEMO === '1' ? '/commenting-system-for-11ty/' : '/'
     };
 };

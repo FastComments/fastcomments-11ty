@@ -15,12 +15,12 @@
       } catch (e) {}
     })();
   </script>
-  <link rel="stylesheet" href="/fastcomments-showcase.css">
+  <link rel="stylesheet" href="{{ '/fastcomments-showcase.css' | url }}">
 </head>
 <body>
   <div class="fc-shell">
     <aside class="fc-rail">
-      <a class="fc-brand" href="/">
+      <a class="fc-brand" href="{{ '/' | url }}">
         <img class="fc-brand__logo fc-brand__logo--light" src="https://fastcomments.com/images/svg/v2/logo.svg" alt="FastComments">
         <img class="fc-brand__logo fc-brand__logo--dark" src="https://fastcomments.com/images/svg/v2/logo_white.svg" alt="" aria-hidden="true">
         <span class="fc-brand__wordmark">
@@ -45,7 +45,7 @@
             { href: "/user-activity-feed/", label: "Activity Feed", hint: "Per-user timeline" }
           ] %}
           {% for item in navItems %}
-            <a class="fc-nav__item {% if page.url == item.href %}is-active{% endif %}" href="{{ item.href }}">
+            <a class="fc-nav__item {% if page.url == item.href %}is-active{% endif %}" href="{{ item.href | url }}">
               <span class="fc-nav__item-label">{{ item.label }}</span>
               <span class="fc-nav__item-hint">{{ item.hint }}</span>
             </a>
@@ -62,7 +62,7 @@
             { href: "/secure-sso/", label: "Secure SSO", hint: "HMAC-signed identity" }
           ] %}
           {% for item in flowItems %}
-            <a class="fc-nav__item {% if page.url == item.href %}is-active{% endif %}" href="{{ item.href }}">
+            <a class="fc-nav__item {% if page.url == item.href %}is-active{% endif %}" href="{{ item.href | url }}">
               <span class="fc-nav__item-label">{{ item.label }}</span>
               <span class="fc-nav__item-hint">{{ item.hint }}</span>
             </a>
