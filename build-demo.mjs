@@ -15,8 +15,11 @@ const sh = (cmd, cwd = ROOT, env = {}) => {
     execSync(cmd, { stdio: 'inherit', cwd, env: { ...process.env, ...env } });
 };
 
+// Install root first so the lib's `prepare` hook (tsc) has its devDeps;
+// then example, which links to the built parent via file:..
+sh('npm ci', ROOT);
 sh('npm ci', EXAMPLE);
-sh('npx eleventy', EXAMPLE, { BUILD_DEMO: '1' });
+sh('./node_modules/.bin/eleventy', EXAMPLE, { BUILD_DEMO: '1' });
 
 rmSync(OUT, { recursive: true, force: true });
 renameSync(resolve(EXAMPLE, 'dist'), OUT);
