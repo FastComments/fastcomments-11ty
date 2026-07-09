@@ -6,18 +6,6 @@ A fast, full-featured live commenting widget for [Eleventy](https://www.11ty.dev
 
 Try every widget live at <https://fastcomments.com/commenting-system-for-11ty>.
 
-## Live Showcase
-
-To see every shortcode and flow running locally against the public `demo` tenant, clone the repo and run:
-
-```bash
-cd example
-npm install
-npm start
-```
-
-Each component has its own page under `example/src/pages/` that you can copy straight into your own Eleventy site.
-
 ## Install
 
 [![npm](https://img.shields.io/npm/v/fastcomments-11ty?logo=npm&label=npm&color=cb3837)](https://www.npmjs.com/package/fastcomments-11ty)
